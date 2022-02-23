@@ -115,6 +115,12 @@ import router from "./router"
 use(router)
 ```
 
+## scss 的使用和安装
+
+1. npm install sass-loader --save-dev
+2. npm install node-sass --save-dev
+3. npm install sass --save-dev
+
 #### 注：createWebHashHistory 的 base 参数是额外增加的，如下：
 
 - 提供可选的 base。默认是 location.pathname + location.search。如果 head 中有一个 <base>，它的值将被忽略，而采用这个参数。但请注意它会影响所有的 history.pushState() 调用，这意味着如果你使用一个 <base> 标签，它的 href 值必须与这个参数相匹配 (请忽略 # 后面的所有内容)
