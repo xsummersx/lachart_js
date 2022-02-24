@@ -24,10 +24,7 @@ define:{
   }
 ```
 
-## 关于分支 vuex-setting 为搭建好的框架
-
-1. 电脑全局安装：npm install -g json-server
-2. 启动：json-server db.json --port 3001
+## 关于分支 setting 为搭建好的框架
 
 ## 关于 父子之间传值
 
@@ -44,6 +41,9 @@ define:{
    ```
 
 ## 配置 json-server 接口调用
+
+1. 电脑全局安装：npm install -g json-server
+2. 启动：json-server db.json --port 3001
 
 ## 关于 封装 axios 的请求方式
 
