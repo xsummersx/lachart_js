@@ -26,6 +26,9 @@ define:{
 
 ## 关于分支 vuex-setting 为搭建好的框架
 
+1. 电脑全局安装：npm install -g json-server
+2. 启动：json-server db.json --port 3001
+
 ## 关于 父子之间传值
 
 1. 父传子：
