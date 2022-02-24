@@ -134,3 +134,52 @@ use(router)
 createWebHashHistory() // 给出的网址为 `https://example.com/folder#`
 createWebHashHistory('/folder/') // 给出的网址为 `https://example.com/folder/#`
 ```
+
+## 关于 vue3-ace-editor 的使用
+
+1. 安装：npm install vue3-ace-editor
+2. 安装主题包：npm install brace
+3. 参考地址：
+   - 设置 vue3-ace-editor：https://www.npmjs.com/package/vue3-ace-editor
+   - 设置 brace：https://www.npmjs.com/package/brace
+   - 设置代码：https://github.com/drdung1999/ace-editor-vue3
+
+```
+<template>
+  <VAceEditor
+    v-model:value="content"
+    lang="javascript"
+    theme="chrome"
+    :options="editorOptions"
+    style="height: 300px; width: 400px; border: 1px solid red"
+  />
+</template>
+<script>
+import { VAceEditor } from "vue3-ace-editor";
+//引入主题
+import "brace/mode/javascript";
+import "brace/theme/chrome";
+//设置路径未找到
+import * as ace from "ace-builds/src-noconflict/ace";
+ace.config.set("basePath", "/assets/ui/");
+ace.config.set("modePath", "");
+ace.config.set("themePath", "");
+export default {
+  name: "Editor",
+  data() {
+    return {
+      content: "",
+      editorOptions: {
+        showPrintMargin: false, //去除编辑器里的竖线
+      },
+    };
+  },
+  components: {
+    VAceEditor,
+  },
+  methods: {
+  },
+};
+</script>
+
+```

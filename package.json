@@ -9,10 +9,12 @@
   },
   "dependencies": {
     "axios": "^0.26.0",
+    "brace": "^0.11.1",
     "element-plus": "^2.0.2",
     "pinia": "^2.0.0-rc.10",
     "vue": "^3.2.25",
-    "vue-router": "^4.0.12"
+    "vue-router": "^4.0.12",
+    "vue3-ace-editor": "^2.2.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.2.0",
