@@ -103,6 +103,7 @@ use(pinia)
 ```
 
 3. 开始正常使用
+4. 数据持久化：https://blog.csdn.net/qq_44285092/article/details/122627683
 
 ## router 的使用
 
