@@ -1,5 +1,29 @@
 {
-  "userInfo": {
-    "set": "123"
+  "Login":{
+      "state":true
+  },
+  "getChartsList":[{
+      "ID":"pie001",
+      "type":"pie",
+      "chartName":"环形饼图",
+      "time":"2021-02-21",
+      "collect":25,
+      "option":"",
+      "img":"https://cdn.jsdelivr.net/gh/apache/echarts-website@asf-site/examples/data/thumb/pie-simple.png?_v_=1643452312113"
+  },
+  {
+      "ID":"pie002",
+      "type":"pie",
+      "chartName":"环形饼图",
+      "time":"2021-02-21",
+      "collect":25,
+      "option":"",
+      "img":"https://cdn.jsdelivr.net/gh/apache/echarts-website@asf-site/examples/data/thumb/pie-simple.png?_v_=1643452312113"
+  }],
+  "getChartDetail":{
+      "ID":"pie001",
+      "type":"pie",
+      "chartName":"环形饼图",
+      "option":""
   }
 }

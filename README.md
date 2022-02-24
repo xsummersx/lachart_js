@@ -135,6 +135,10 @@ createWebHashHistory() // 给出的网址为 `https://example.com/folder#`
 createWebHashHistory('/folder/') // 给出的网址为 `https://example.com/folder/#`
 ```
 
+## 关于 echarts 的安装
+
+1. 安装：npm install echarts --save
+
 ## 关于 vue3-ace-editor 的使用
 
 1. 安装：npm install vue3-ace-editor

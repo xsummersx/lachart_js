@@ -8,39 +8,41 @@
 -->
 
 <template>
-  <h1>{{ count }}</h1>
-  <!-- elementUI测试 -->
+  <!-- <h1>{{ count }}</h1>
+
   <el-button type="danger">Danger</el-button>
   <el-alert title="success alert" type="success" />
   <h2>{{ store.name }}</h2>
   <h2>{{ store.doubleCont }}</h2>
-  <a>123312<span>sdklgjaslg</span>></a>
+  <a>123312<span>sdklgjaslg</span>></a> -->
 </template>
 <script setup>
-import { ref } from "vue";
-import { getInfo } from "@/api/getUser";
-import { useStore } from "@/store/index";
-//import axios from "@/axios/http";
-const count = ref(0);
-const store = useStore();
-setTimeout(() => {
-  store.changState("张三");
-}, 1500);
-//axios测试
-// axios.get("userInfo").then((res) => {
+// import { ref } from "vue";
+// import { getInfo } from "@/api/getUser";
+// import { useStore } from "@/store/index";
+// //import axios from "@/axios/http";
+// const count = ref(0);
+// const store = useStore();
+// setTimeout(() => {
+//   store.changState("张三");
+// }, 1500);
+// //axios测试
+// // axios.get("userInfo").then((res) => {
+// //   console.log(res);
+// // });
+// //axios测试二
+// getInfo().then((res) => {
 //   console.log(res);
 // });
-//axios测试二
-getInfo().then((res) => {
-  console.log(res);
-});
+//
 </script>
 
+//
 <style scoped lang="scss">
-a {
-  color: #42b983;
-  span {
-    color: red;
-  }
-}
+// a {
+//   color: #42b983;
+//   span {
+//     color: red;
+//   }
+// }
 </style>
