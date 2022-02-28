@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-20 13:47:55
- * @LastEditTime: 2022-02-24 17:09:27
+ * @LastEditTime: 2022-02-28 14:12:03
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \lachart\src\components\Login\LoginBox.vue
@@ -57,7 +57,7 @@
       ></el-input>
     </el-form-item>
     <el-form-item>
-      <el-button type="success" @click="customLogin" class="submit_btn">游客登录</el-button>
+      <!-- <el-button type="success" @click="customLogin" class="submit_btn">游客登录</el-button> -->
       <el-button type="primary" @click="submit()" class="submit_btn">登录</el-button>
     </el-form-item>
     <slot name="forget"></slot>
@@ -82,10 +82,10 @@ if (localStorage.getItem("UserID")) {
   router.push("/");
 }
 //游客登录
-const customLogin = () => {
-  store.setUserInfo("laChart游客");
-  router.push("/");
-};
+// const customLogin = () => {
+//   store.setUserInfo("laChart游客");
+//   router.push("/");
+// };
 //点击登录
 const submit = () => {
   formRef.value.validate((valid) => {

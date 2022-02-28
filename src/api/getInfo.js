@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-02-23 19:25:20
- * @LastEditTime: 2022-02-24 17:03:31
+ * @LastEditTime: 2022-02-24 20:01:09
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \lachart_js\src\api\getUser.js
@@ -30,6 +30,14 @@ export function Login() {
 export function getList() {
     return axios({
         url: "http://localhost:3001/getChartsList",
+        method: "get",
+        data: {}
+    })
+}
+//获取统计图详情
+export function getChartDetail() {
+    return axios({
+        url: "http://localhost:3001/getChartDetail",
         method: "get",
         data: {}
     })

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-20 16:31:04
- * @LastEditTime: 2022-02-24 17:01:25
+ * @LastEditTime: 2022-02-28 14:11:04
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \lachart\src\components\Head\Head.vue
@@ -12,7 +12,8 @@
       <img class="logo" :src="rose" />
       <h3>LaCharts</h3>
     </div>
-    <div class="lastBox">
+    <!-- 已登录状态 -->
+    <div class="lastBox" v-if="UserID">
       <span class="Text"
         >欢迎您，<b class="bCol">{{ UserID }}</b></span
       >
@@ -36,6 +37,11 @@
         </svg>
       </div>
     </div>
+    <!-- 未登录状态 -->
+    <div v-if="!UserID" class="lastBox">
+      <el-button type="success" @click="GotoLogin">去登录</el-button>
+      <el-button type="warning" @click="GotoReg">还没有账号？先去注册</el-button>
+    </div>
   </div>
 </template>
 <script setup>
@@ -51,15 +57,24 @@ const { MainRed } = store.$state.ColorObj;
 const { MainYellow } = store.$state.ColorObj;
 const { MainOrange } = store.$state.ColorObj;
 const { UserID } = store.$state.UserInfo;
-
-if (!UserID) {
-  router.push("/Login");
-}
 //退出登录
 const Export = () => {
   //清楚缓存
   clearToken();
   router.push("/Login");
+};
+//去登录
+const GotoLogin = () => {
+  router.push("/Login");
+};
+//去注册
+const GotoReg = () => {
+  router.push({
+    path: "/Login",
+    query: {
+      signUpMode: true,
+    },
+  });
 };
 </script>
 <style scoped>

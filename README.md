@@ -33,7 +33,7 @@ define:{
    - defineEmits 子组件调用父组件传过来的参数
 2. 子传父：
    - defineExpose 抛出子组件的方法或对象
-   ```
+   ```js
    <child ref="root"></child>
    ....
    const root = ref(null)
@@ -66,7 +66,7 @@ define:{
 1. 安装 elementUI: yarn add element-plus
 2. 配置 voler 支持
 
-```
+```js
 // tsconfig.json
 {
   "compilerOptions": {
@@ -79,7 +79,7 @@ define:{
 2. 按需导入需要安装 npm install -D unplugin-vue-components unplugin-auto-import
 3. 配置 vite.config.ts
 
-```
+```js
 plugins: [
     // ...
     AutoImport({
@@ -98,11 +98,11 @@ plugins: [
 1. 安装 vuex： yarn add pinia@next
 2. main.ts 引入
 
-```
-import {createPinia} from 'pinia';
+```js
+import { createPinia } from "pinia";
 //创建实例
 const pinia = createPinia();
-use(pinia)
+use(pinia);
 ```
 
 3. 开始正常使用
@@ -129,10 +129,10 @@ use(router)
 
 - 提供可选的 base。默认是 location.pathname + location.search。如果 head 中有一个 <base>，它的值将被忽略，而采用这个参数。但请注意它会影响所有的 history.pushState() 调用，这意味着如果你使用一个 <base> 标签，它的 href 值必须与这个参数相匹配 (请忽略 # 后面的所有内容)
 
-```
+```js
 // at https://example.com/folder
-createWebHashHistory() // 给出的网址为 `https://example.com/folder#`
-createWebHashHistory('/folder/') // 给出的网址为 `https://example.com/folder/#`
+createWebHashHistory(); // 给出的网址为 `https://example.com/folder#`
+createWebHashHistory("/folder/"); // 给出的网址为 `https://example.com/folder/#`
 ```
 
 ## 关于 echarts 的安装
@@ -148,7 +148,7 @@ createWebHashHistory('/folder/') // 给出的网址为 `https://example.com/fold
    - 设置 brace：https://www.npmjs.com/package/brace
    - 设置代码：https://github.com/drdung1999/ace-editor-vue3
 
-```
+```js
 <template>
   <VAceEditor
     v-model:value="content"
@@ -181,9 +181,7 @@ export default {
   components: {
     VAceEditor,
   },
-  methods: {
-  },
+  methods: {},
 };
 </script>
-
 ```
