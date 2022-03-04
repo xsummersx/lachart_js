@@ -1,15 +1,15 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-21 11:17:10
- * @LastEditTime: 2022-02-28 14:00:37
+ * @LastEditTime: 2022-03-03 19:22:31
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \lachart\src\components\Main\List.vue
 -->
 <template>
   <div class="ListBox">
-    <el-row>
-      <el-col :span="4" v-for="(item, index) in initData.chartList" :key="index">
+    <el-row v-if="dataList.length > 0">
+      <el-col :span="4" v-for="(item, index) in dataList" :key="index">
         <div class="Item" @click="detail">
           <div class="ItemTitle">{{ item.chartName }}</div>
           <el-image
@@ -31,19 +31,22 @@
         </div>
       </el-col>
     </el-row>
+    <div v-else>列表暂无数据</div>
   </div>
 </template>
 <script setup>
-import { getList } from "@/api/getInfo";
+import { ref } from "vue";
 import { onMounted, reactive } from "vue";
 import { useRouter } from "vue-router";
-let initData = reactive({ chartList: [] });
+import { GetAllImageList } from "@/api/API";
 const router = useRouter();
+const dataList = ref([]);
 //mount
 onMounted(() => {
-  getList().then((res) => {
-    if (res.status == 200) {
-      initData.chartList = res.data;
+  GetAllImageList().then((res) => {
+    console.log(res);
+    if (res.data.Code == 1) {
+      dataList.value = res.data.Data;
     }
   });
 });

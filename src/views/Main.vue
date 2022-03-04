@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-21 16:04:36
- * @LastEditTime: 2022-03-01 11:36:53
+ * @LastEditTime: 2022-03-03 20:46:46
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \lachart\src\components\Main\Main.vue
@@ -37,23 +37,39 @@ import { onMounted } from "vue";
 import Editor from "@/components/Main/Editor.vue";
 import Head from "@/components/Head/Head.vue";
 import { Star } from "@element-plus/icons-vue";
+import { NewChart } from "@/api/API";
+import { useRoute } from "vue-router";
+import { useStore } from "@/store/index";
 //接口
-import { getChartDetail } from "@/api/getInfo.js";
+import { getChartDetail, UploadImage } from "@/api/API";
+const store = useStore();
 let content = ref("");
 //子组件的类
 const editor = ref(null);
 const aceHeight = ref("816px"); //框的高度
+//router
+const route = useRoute();
 let myChart;
+//钩子函数
 onMounted(() => {
   myChart = init(document.getElementById("Main"));
-  getChartDetail().then((res) => {
-    content.value = res.data.option;
-    console.log(content.value);
-    //let option = eval(content.value);
+  //新建的页面
+  if (!route.query.Num) {
+    content.value = NewChart().option;
     let myStr = `myChart.setOption(${content.value})`;
     eval(myStr);
-  });
+  } else {
+    //旧的页面
+    getChartDetail().then((res) => {
+      content.value = res.data.option;
+      console.log(content.value);
+      //let option = eval(content.value);
+      let myStr = `myChart.setOption(${content.value})`;
+      eval(myStr);
+    });
+  }
 });
+
 //刷新
 const BtnReload = () => {
   myChart = init(document.getElementById("Main"));
@@ -75,31 +91,41 @@ const CollectBtn = (e) => {
   }
   target.blur();
 };
-//**下载图片 */
+/*
+ * 模块说明
+ * @ 保存模块
+ */
+//保存方法
 const saveBtn = () => {
-  // src.value = myChart.getDataURL({
-  //   pixelRatio: 2,
-  //   backgroundColor: "#fff",
-  // });
   let offcan = myChart.getDataURL({
     pixelRatio: 2,
     backgroundColor: "#fff",
   });
   console.log(offcan);
-  const block = offcan.split(";");
-  const contentType = block[0].split(":")[1];
-  const realData = block[1].split(",")[1];
-  var blob = b64toBlob(realData, contentType);
+  // const block = offcan.split(";");
+  // const contentType = block[0].split(":")[1];
+  // const realData = block[1].split(",")[1];
+  var blob = b64toBlob(offcan);
   const formData = new FormData();
   formData.append("blob", blob);
-  // $.ajax({
-  //   url: url,
-  //   data: formData,
-  //   type: "POST",
-  //   async: true,
-  //   error: function (err) {},
-  //   success: function (data) {},
-  // });
+  let imgID = new Date().getTime() + store.$state.UserInfo.UserID;
+  UploadImage(formData, { Num: imgID }).then((res) => {
+    console.log(res);
+  });
+};
+const b64toBlob = (dataurl, filename = "file") => {
+  let arr = dataurl.split(",");
+  let mime = arr[0].match(/:(.*?);/)[1];
+  let suffix = mime.split("/")[1];
+  let bstr = atob(arr[1]);
+  let n = bstr.length;
+  let u8arr = new Uint8Array(n);
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new File([u8arr], `${filename}.${suffix}`, {
+    type: mime,
+  });
 };
 </script>
 <style scoped lang="scss">

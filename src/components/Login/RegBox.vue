@@ -8,6 +8,24 @@
     class="loginForm sign-in-form"
   >
     <el-form-item
+      label="昵称"
+      prop="adminName"
+      :rules="[
+        {
+          required: true,
+          message: '昵称不能为空',
+          trigger: 'blur',
+        },
+        {
+          min: 2,
+          max: 30,
+          message: '昵称请输入2~30个字符',
+        },
+      ]"
+    >
+      <el-input autocomplete="off" placeholder="请输入昵称" v-model="formData.adminName"></el-input>
+    </el-form-item>
+    <el-form-item
       label="账号"
       prop="adminText"
       :rules="[
@@ -78,13 +96,17 @@
 <script setup>
 import { ref, reactive } from "vue";
 import { ElMessage } from "element-plus";
-
+import { useRouter } from "vue-router";
+import { useStore } from "@/store/index";
+import { SaveUserInfo } from "@/api/API";
 const formData = reactive({
+  adminName: "",
   adminText: "",
   pwdText1: "",
   pwdText2: "",
 });
-
+const router = useRouter();
+const store = useStore();
 const formRef = ref();
 const checkPwd = (rule, value, callback) => {
   if (value.trim().length == 0) {
@@ -97,14 +119,31 @@ const checkPwd = (rule, value, callback) => {
 };
 const regForm = () => {
   formRef.value.validate((valid) => {
+    //确认输入信息无错误
     if (valid) {
-      ElMessage({
-        message: "提交成功",
-        type: "success",
+      //入参
+      let params = {
+        UserID: formData.adminText,
+        Pwd: formData.pwdText1,
+        UserName: formData.adminName,
+      };
+      SaveUserInfo(params).then((res) => {
+        if (res.data.Code == 1) {
+          ElMessage({
+            message: "注册成功，正在登录请稍候~",
+            type: "success",
+          });
+          store.setUserInfo({
+            UserID: formData.adminText,
+            UserName: formData.adminName,
+            Token: res.data.Data,
+          });
+          router.push("/");
+        }
       });
     } else {
       ElMessage({
-        message: "提交失败",
+        message: "提交失败，录入信息有误~",
         type: "error",
       });
     }

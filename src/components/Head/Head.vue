@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-20 16:31:04
- * @LastEditTime: 2022-02-28 14:11:04
+ * @LastEditTime: 2022-03-03 20:18:05
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \lachart\src\components\Head\Head.vue
@@ -14,6 +14,9 @@
     </div>
     <!-- 已登录状态 -->
     <div class="lastBox" v-if="UserID">
+      <el-button type="success" style="margin-right: 15px" @click="goToNewChart"
+        >新建统计图</el-button
+      >
       <span class="Text"
         >欢迎您，<b class="bCol">{{ UserID }}</b></span
       >
@@ -47,7 +50,6 @@
 <script setup>
 import rose from "@/assets/img/rose.png";
 import { useStore, clearToken } from "@/store/index";
-
 import { useRouter } from "vue-router";
 const store = useStore();
 const router = useRouter();
@@ -75,6 +77,14 @@ const GotoReg = () => {
       signUpMode: true,
     },
   });
+};
+//新建统计图
+const goToNewChart = () => {
+  // router.push({
+  //   path: "/Main",
+  // });
+  //弹出一个新页面
+  window.open(location.href + "Main");
 };
 </script>
 <style scoped>

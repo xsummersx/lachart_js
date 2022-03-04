@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-02-23 18:37:02
- * @LastEditTime: 2022-02-24 17:10:01
+ * @LastEditTime: 2022-03-03 09:22:16
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \lachart_js\vite.config.js
@@ -12,7 +12,6 @@ import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue(),
@@ -31,4 +30,13 @@ export default defineConfig({
   define: {
     "process.env": {}
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://172.16.41.236:12080/api',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      },
+    }
+  }
 })
