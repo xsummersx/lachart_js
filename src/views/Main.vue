@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-21 16:04:36
- * @LastEditTime: 2022-03-09 09:48:47
+ * @LastEditTime: 2022-03-09 13:49:41
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \lachart\src\components\Main\Main.vue
@@ -93,7 +93,7 @@ import { NewChart } from "@/api/API";
 import { useRoute, useRouter } from "vue-router";
 import { useStore } from "@/store/index";
 //接口
-import { UploadImage, SaveImageType, GetOnlyImageInfo } from "@/api/API";
+import { UploadImage, SaveImageType, GetOnlyImageInfo, DeleteImageNum } from "@/api/API";
 import { ElMessageBox } from "element-plus";
 const store = useStore();
 let content = ref(""); //统计图的Option
@@ -250,10 +250,23 @@ const delBtn = () => {
     cancelButtonText: "否",
   })
     .then(() => {
-      console.log("删除成功");
+      DeleteImageNum({ Num: Num.value }).then((res) => {
+        if (res.data.Data) {
+          ElMessage({
+            message: "删除成功，即将关闭页面~",
+            type: "success",
+          });
+          setTimeout(() => {
+            window.close();
+          }, 1200);
+        }
+      });
     })
     .catch(() => {
-      console.log("删除失败");
+      ElMessage({
+        message: "删除失败~",
+        type: "error",
+      });
     });
 };
 </script>

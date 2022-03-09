@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-20 16:31:04
- * @LastEditTime: 2022-03-09 09:08:50
+ * @LastEditTime: 2022-03-09 13:39:25
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \lachart\src\components\Head\Head.vue
@@ -84,7 +84,7 @@ const goToNewChart = () => {
   //   path: "/Main",
   // });
   //弹出一个新页面
-  window.open(location.origin + "/#/Main");
+  window.open(location.origin + "/Web/index.html#/Main");
 };
 </script>
 <style scoped>

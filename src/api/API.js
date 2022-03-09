@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-02-23 19:25:20
- * @LastEditTime: 2022-03-08 19:00:39
+ * @LastEditTime: 2022-03-09 13:41:17
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \lachart_js\src\api\getUser.js
@@ -103,6 +103,14 @@ export function SaveImageType(data) {
 export function GetOnlyImageInfo(params) {
     return axios({
         url: "Learning/GetOnlyImageInfo",
+        method: "get",
+        params: { ...params },
+    })
+}
+//删除某个统计图
+export function DeleteImageNum(params) {
+    return axios({
+        url: "Learning/DeleteImageNum",
         method: "get",
         params: { ...params },
     })
