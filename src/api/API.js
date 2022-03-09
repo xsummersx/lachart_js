@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-02-23 19:25:20
- * @LastEditTime: 2022-03-03 20:46:26
+ * @LastEditTime: 2022-03-08 19:00:39
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \lachart_js\src\api\getUser.js
@@ -87,7 +87,23 @@ export function UploadImage(imgFor, objName) {
     return axios({
         url: "Learning/UploadImage",
         method: "post",
-        data: { imgFor },
+        data: imgFor,
         params: { ...objName }
+    })
+}
+//保存统计图接口
+export function SaveImageType(data) {
+    return axios({
+        url: "Learning/SaveImageType",
+        method: "post",
+        data: { ...data },
+    })
+}
+//获取详情
+export function GetOnlyImageInfo(params) {
+    return axios({
+        url: "Learning/GetOnlyImageInfo",
+        method: "get",
+        params: { ...params },
     })
 }

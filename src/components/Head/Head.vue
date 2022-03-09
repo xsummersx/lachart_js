@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-20 16:31:04
- * @LastEditTime: 2022-03-03 20:18:05
+ * @LastEditTime: 2022-03-09 09:08:50
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \lachart\src\components\Head\Head.vue
@@ -18,7 +18,7 @@
         >新建统计图</el-button
       >
       <span class="Text"
-        >欢迎您，<b class="bCol">{{ UserID }}</b></span
+        >欢迎您，<b class="bCol">{{ UserName }}</b></span
       >
       <div class="ExOut" @click="Export">
         <span class="Text"> 退出登录</span>
@@ -58,7 +58,7 @@ const { MainBlue } = store.$state.ColorObj;
 const { MainRed } = store.$state.ColorObj;
 const { MainYellow } = store.$state.ColorObj;
 const { MainOrange } = store.$state.ColorObj;
-const { UserID } = store.$state.UserInfo;
+const { UserID, UserName } = store.$state.UserInfo;
 //退出登录
 const Export = () => {
   //清楚缓存
@@ -84,7 +84,7 @@ const goToNewChart = () => {
   //   path: "/Main",
   // });
   //弹出一个新页面
-  window.open(location.href + "Main");
+  window.open(location.origin + "/#/Main");
 };
 </script>
 <style scoped>
