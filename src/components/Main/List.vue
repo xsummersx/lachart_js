@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-21 11:17:10
- * @LastEditTime: 2022-03-09 13:39:20
+ * @LastEditTime: 2022-03-09 14:13:36
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \lachart\src\components\Main\List.vue
@@ -11,7 +11,9 @@
     <el-row v-if="dataList.length > 0">
       <el-col :span="4" v-for="(item, index) in dataList" :key="index">
         <div class="Item" @click="detail(item)">
-          <div class="ItemTitle">{{ item.ImageList.ChartName }}</div>
+          <div class="ItemTitle" :title="item.ImageList.ChartName">
+            {{ item.ImageList.ChartName }}
+          </div>
           <el-image
             style="width: 100%; height: 100%"
             class="ImgBox"
@@ -33,7 +35,7 @@
             </div>
             <div class="ItemBox" style="float: left">
               <div class="Title">创建者：</div>
-              <div class="Content">{{ item.ImageList.CreatName }}</div>
+              <div class="Content ovFL" style="">{{ item.ImageList.CreatName }}</div>
             </div>
           </div>
         </div>
@@ -87,6 +89,9 @@ const detail = (item) => {
   color: #666;
   font-weight: bold;
   border-bottom: 1px solid #f1f3f7;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .ItemFeet {
   border-top: 1px solid #f1f3f7;
@@ -105,5 +110,11 @@ const detail = (item) => {
 .Content {
   color: #333;
   font-size: 12px;
+}
+.ovFL {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 90px;
 }
 </style>
