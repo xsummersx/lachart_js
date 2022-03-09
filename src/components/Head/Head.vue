@@ -1,14 +1,14 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-20 16:31:04
- * @LastEditTime: 2022-03-09 13:39:25
+ * @LastEditTime: 2022-03-09 16:25:25
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \lachart\src\components\Head\Head.vue
 -->
 <template>
   <div class="Title">
-    <div class="firstBox">
+    <div class="firstBox" @click="backGo">
       <img class="logo" :src="rose" />
       <h3>LaCharts</h3>
     </div>
@@ -78,6 +78,10 @@ const GotoReg = () => {
     },
   });
 };
+//返回列表页面
+const backGo = () => {
+  router.push("/");
+};
 //新建统计图
 const goToNewChart = () => {
   // router.push({
@@ -100,6 +104,7 @@ const goToNewChart = () => {
   justify-content: space-around;
   align-items: center;
   float: left;
+  cursor: pointer;
 }
 .logo {
   width: 28px;

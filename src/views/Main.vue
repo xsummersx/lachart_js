@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-21 16:04:36
- * @LastEditTime: 2022-03-09 13:49:41
+ * @LastEditTime: 2022-03-09 16:35:16
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \lachart\src\components\Main\Main.vue
@@ -17,11 +17,7 @@
   </div>
   <div class="rightBox">
     <div class="ItemBox">
-      <el-button
-        class="fl"
-        @click="saveBtn"
-        type="success"
-        v-if="store.$state.UserInfo.UserID == creatID && store.$state.UserInfo.UserID"
+      <el-button class="fl" @click="saveBtn" type="success" v-if="store.$state.UserInfo.UserID"
         >保存</el-button
       >
       <el-button
@@ -41,7 +37,7 @@
         >删除</el-button
       >
       <el-input
-        v-if="store.$state.UserInfo.UserID == creatID && store.$state.UserInfo.UserID"
+        v-if="store.$state.UserInfo.UserID"
         class="fl"
         autocomplete="off"
         placeholder="请输入统计图名称"
@@ -60,11 +56,7 @@
           },
         ]"
       ></el-input>
-      <el-select
-        v-if="store.$state.UserInfo.UserID == creatID && store.$state.UserInfo.UserID"
-        v-model="chartType"
-        placeholder="请选择类型"
-      >
+      <el-select v-if="store.$state.UserInfo.UserID" v-model="chartType" placeholder="请选择类型">
         <el-option label="折线图" value="饼图"></el-option>
         <el-option label="柱状图" value="柱状图"></el-option>
         <el-option label="饼图" value="饼图"></el-option>
