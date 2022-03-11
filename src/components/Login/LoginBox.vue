@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-20 13:47:55
- * @LastEditTime: 2022-03-03 11:56:11
+ * @LastEditTime: 2022-03-10 15:07:33
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \lachart\src\components\Login\LoginBox.vue
@@ -95,10 +95,11 @@ const submit = () => {
           message: "登录成功,正在跳转请稍候",
           type: "success",
         });
+        let info = JSON.parse(res.data.Data);
         store.setUserInfo({
           UserID: formData.emailText,
-          UserName: formData.pwdText,
-          Token: res.data.Data,
+          UserName: info.UserName,
+          Token: info.Token,
         });
         router.push("/");
       });

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-21 16:04:36
- * @LastEditTime: 2022-03-09 16:35:16
+ * @LastEditTime: 2022-03-10 20:37:32
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \lachart\src\components\Main\Main.vue
@@ -11,7 +11,7 @@
   <div class="leftEdit">
     <div class="ItemBox">
       <el-button type="primary" class="btn" @click="BtnReload">刷新</el-button>
-      <el-button plain class="btn" @click="Format">格式化</el-button>
+      <el-button plain class="btn" @click="Format" v-if="false">格式化</el-button>
     </div>
     <Editor :aceHeight="aceHeight" :content="content" ref="editor"></Editor>
   </div>
@@ -76,7 +76,7 @@
 </template>
 <script setup>
 import { ref } from "vue";
-import { init } from "echarts";
+import * as echarts from "echarts";
 import { onMounted } from "vue";
 import Editor from "@/components/Main/Editor.vue";
 import Head from "@/components/Head/Head.vue";
@@ -103,12 +103,16 @@ const chartType = ref(""); //统计图类型
 const creatID = ref(""); //创建者名字
 //钩子函数
 onMounted(() => {
-  myChart = init(document.getElementById("Main"));
+  myChart = echarts.init(document.getElementById("Main"));
   //新建的页面
   if (!route.query.Num) {
-    content.value = NewChart().option;
-    let myStr = `myChart.setOption(${content.value})`;
-    eval(myStr);
+    editor.value.setContent(NewChart().option);
+    //content.value = NewChart().option;
+    let myStr = editor.value.getContent();
+    myStr += "myChart.setOption(option);";
+    setTimeout(() => {
+      eval(myStr);
+    }, 50);
   } else {
     //旧的页面
     GetOnlyImageInfo({ Num: route.query.Num }).then((res) => {
@@ -116,10 +120,13 @@ onMounted(() => {
       chartName.value = res.data.Data.ChartName;
       chartType.value = res.data.Data.Type;
       creatID.value = res.data.Data.CreatID;
-      content.value = res.data.Data.Option;
-      //let option = eval(content.value);
-      let myStr = `myChart.setOption(${content.value})`;
-      eval(myStr);
+      //content.value = res.data.Data.Option;
+      editor.value.setContent(res.data.Data.Option);
+      let myStr = editor.value.getContent();
+      myStr += "myChart.setOption(option);";
+      setTimeout(() => {
+        eval(myStr);
+      }, 50);
     });
   }
 });
@@ -128,9 +135,14 @@ onMounted(() => {
  * @ 统计图option操作模块
  */
 const BtnReload = () => {
-  myChart = init(document.getElementById("Main"));
-  let myStr = `myChart.setOption(${editor.value.content})`;
-  eval(myStr);
+  myChart.clear();
+  //  eval(editor.value.getContent());
+  let myStr = editor.value.getContent();
+  console.log(myStr);
+  myStr += "myChart.setOption(option);";
+  setTimeout(() => {
+    eval(myStr);
+  }, 50);
 };
 //格式化代码
 const Format = () => {
@@ -163,7 +175,6 @@ const saveBtn = async () => {
     });
   } else {
     let chartID = "";
-    console.log("Num:" + Num.value);
     if (Num.value) {
       chartID = Num.value;
     } else {
@@ -176,7 +187,7 @@ const saveBtn = async () => {
       let imgInfo = {
         Type: chartType.value,
         ChartName: chartName.value,
-        Option: content.value,
+        Option: editor.value.getContent(),
         Img: imgResult.data.Data,
         CreatName: store.$state.UserInfo.UserName,
         CreatID: store.$state.UserInfo.UserID,
@@ -245,12 +256,12 @@ const delBtn = () => {
       DeleteImageNum({ Num: Num.value }).then((res) => {
         if (res.data.Data) {
           ElMessage({
-            message: "删除成功，即将关闭页面~",
+            message: "删除成功，即将返回列表~",
             type: "success",
           });
           setTimeout(() => {
-            window.close();
-          }, 1200);
+            router.push("/");
+          }, 700);
         }
       });
     })

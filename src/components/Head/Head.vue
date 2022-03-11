@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-20 16:31:04
- * @LastEditTime: 2022-03-09 16:25:25
+ * @LastEditTime: 2022-03-10 15:25:03
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \lachart\src\components\Head\Head.vue
@@ -14,7 +14,11 @@
     </div>
     <!-- 已登录状态 -->
     <div class="lastBox" v-if="UserID">
-      <el-button type="success" style="margin-right: 15px" @click="goToNewChart"
+      <el-button
+        type="success"
+        v-if="route.path == '/'"
+        style="margin-right: 15px"
+        @click="goToNewChart"
         >新建统计图</el-button
       >
       <span class="Text"
@@ -50,9 +54,10 @@
 <script setup>
 import rose from "@/assets/img/rose.png";
 import { useStore, clearToken } from "@/store/index";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 const store = useStore();
 const router = useRouter();
+const route = useRoute();
 const { PrimaryBlue } = store.$state.ColorObj;
 const { MainBlue } = store.$state.ColorObj;
 const { MainRed } = store.$state.ColorObj;
@@ -84,11 +89,11 @@ const backGo = () => {
 };
 //新建统计图
 const goToNewChart = () => {
-  // router.push({
-  //   path: "/Main",
-  // });
+  router.push({
+    path: "/Main",
+  });
   //弹出一个新页面
-  window.open(location.origin + "/Web/index.html#/Main");
+  //window.open(location.origin + "/Web/index.html#/Main");
 };
 </script>
 <style scoped>

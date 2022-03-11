@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-24 14:13:13
- * @LastEditTime: 2022-03-01 11:21:58
+ * @LastEditTime: 2022-03-10 19:42:24
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \lachart_js\src\components\Editor.vue
@@ -56,15 +56,18 @@ export default {
 
     //格式化代码
     forMatter() {
-      let cont = JSON.parse(this.content);
-      // console.log(cont);
+      let cont = this.content;
       //let contStr = JSON.stringify(this.content, null, 2);
-      // console.log(contStr);
-      // console.log("ok");
       //this.$refs.editorDOM._editor.getSession().setTabSize(2);
       // this.$refs.editorDOM._editor.getSession().setUseWrapMode(true);
       //格式化JSON
-      this.$refs.editorDOM._editor.setValue(JSON.stringify(cont, null, "\t"));
+      this.$refs.editorDOM._editor.setValue(cont);
+    },
+    setContent(cont) {
+      this.$refs.editorDOM._editor.setValue(cont);
+    },
+    getContent() {
+      return this.$refs.editorDOM._editor.getValue();
     },
   },
 };
